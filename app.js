@@ -26,13 +26,27 @@ const __dirname = path.dirname(__filename);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
 
-// Middleware
-app.use(express.json());  // Parse JSON requests
-app.use(express.urlencoded({ extended: true }));  // Parse form data
-
 // Import Models
 import Category from './src/models/categoryModels.js';
 import Product from './src/models/productModels.js';
+
+// Admin Routes
+const setupAdminPanel = async (app) => {
+    try {
+        await buildAdminJS(app);
+        console.log('✅ Admin panel initialized successfully');
+    } catch (error) {
+        console.error('❌ Error initializing admin panel:', error);
+        throw error;
+    }
+};
+
+// Initialize Admin Panel before body-parser middleware
+await setupAdminPanel(app);
+
+// Middleware - after admin panel setup
+app.use(express.json());  // Parse JSON requests
+app.use(express.urlencoded({ extended: true }));  // Parse form data
 
 // User Routes
 app.get('/', async (req, res) => {
@@ -60,17 +74,6 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/category', categoryRoutes);
 
-// Admin Routes
-const setupAdminPanel = async (app) => {
-    try {
-        await buildAdminJS(app);
-        console.log('✅ Admin panel initialized successfully');
-    } catch (error) {
-        console.error('❌ Error initializing admin panel:', error);
-        throw error;
-    }
-};
-
 // Start the server function
 const start = async () => {
     const PORT = process.env.PORT || 3000;
@@ -80,9 +83,6 @@ const start = async () => {
         // Connect to MongoDB
         await connect(process.env.MONGO_URI);
         console.log('✅ Connected to MongoDB');
-
-        // Initialize Admin Panel
-        await setupAdminPanel(app);
 
         app.listen(PORT, HOST, () => {
             console.log(`✅ Server running at: http://localhost:${PORT}`);
