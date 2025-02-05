@@ -17,6 +17,7 @@ dotenv.config();
 
 // Create an Express application
 const app = express();
+app.use(express.static('public'));
 
 // Fix `__dirname` for ES modules
 const __filename = fileURLToPath(import.meta.url);
