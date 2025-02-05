@@ -446,6 +446,17 @@
 
             .category-box {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .category-box div {
+                width: 100%;
+                margin: 0;
+            }
+
+            .category-box img {
+                width: 100%;
+                height: auto;
             }
 
             .about-content {
@@ -465,7 +476,8 @@
             }
 
             .category-box {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
 
             .category-box div {
@@ -514,8 +526,7 @@
     <div class="profile-modal" id="profileModal">
         <div class="profile-modal-content">
             <button class="close-btn" onclick="closeProfileModal()">×</button>
-            <h3>User Profile</h3>
-            <div id="userProfileDetails">
+           
                 <!-- User details will be displayed here -->
             </div>
         </div>
