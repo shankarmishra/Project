@@ -407,40 +407,38 @@
 
         @media (max-width: 768px) {
             nav {
-                flex-direction: column;
+                flex-direction: row;
                 padding: 10px;
-                height: auto;
+                height: 60px;
                 position: fixed;
+                align-items: center;
             }
 
             .logo {
                 height: 30px;
-                margin-bottom: 10px;
+                margin: 0;
             }
 
             .nav-links {
                 flex-direction: row;
-                width: 100%;
                 justify-content: center;
-                margin: 10px 0;
+                margin: 0;
             }
 
             .nav-icons {
                 flex-direction: row;
-                width: 100%;
-                justify-content: center;
-                margin-top: 10px;
+                justify-content: flex-end;
+                margin: 0;
             }
 
             .search-bar {
-                width: 100%;
-                max-width: 300px;
-                margin: 10px 0;
+                width: 150px;
+                margin: 0;
             }
 
             .hero-banner {
                 min-height: 300px;
-                margin-top: 200px;
+                margin-top: 80px;
                 padding: 20px;
             }
 
@@ -503,7 +501,7 @@
 <body>
     <header>
         <nav>
-            <img src="/images/logo.png" alt="Plant Store Logo" class="logo">
+            <img src="../assets/logo.png" alt="Plant Store Logo" class="logo">
             <div class="nav-links">
                 <a onclick="window.location.href='/blog'">BLOG</a>
             </div>
