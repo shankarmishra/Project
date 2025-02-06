@@ -131,6 +131,20 @@
             margin-top: 15px;
             color: #4CAF50;
         }
+
+        .delete-btn {
+            background-color: #ff3b3b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff1a1a;
+        }
     </style>
 </head>
 <body>
@@ -218,6 +232,7 @@
                                                 <p>Quantity: ${item.quantity || 0}</p>
                                                 <p>Subtotal: ₹${(item.product.price || 0) * (item.quantity || 0)}</p>
                                             </div>
+                                            <button class="delete-btn" data-order-id="${order._id}" data-item-id="${item._id}">Delete Item</button>
                                         </div>
                                     `;
                                 }).join('') : '<div class="error-message">No items found in this order</div>'}
@@ -229,6 +244,34 @@
                         return `<div class="error-message">Error displaying order information</div>`;
                     }
                 }).join('');
+
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        const orderId = e.target.getAttribute('data-order-id');
+                        const itemId = e.target.getAttribute('data-item-id');
+
+                        try {
+                            const deleteResponse = await fetch(`/api/orders/${orderId}/items/${itemId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Authorization': `Bearer ${token}`,
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (!deleteResponse.ok) {
+                                throw new Error('Failed to delete item');
+                            }
+
+                            alert('Item deleted successfully');
+                            window.location.reload();  // Reload to reflect changes
+                        } catch (error) {
+                            console.error('Error deleting item:', error);
+                            alert('Failed to delete item');
+                        }
+                    });
+                });
             } catch (error) {
                 console.error("Error fetching orders:", error);
                 document.getElementById('orders-container').innerHTML = `

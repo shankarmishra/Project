@@ -1,7 +1,6 @@
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path'; // Add this at the top
-
 import express from 'express';
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
@@ -41,16 +40,59 @@ export const buildAdminJS = async (app) => {
   // Define AdminJS resources (collections to be managed in the admin panel)
   const adminJS = new AdminJS({
     resources: [
-      { resource: Product },
-      { resource: Category },
-      { resource: Order },
-      { resource: Transaction },
-      { resource: User },
+      {
+        resource: Product,
+        options: {
+          listProperties: ['name', 'price', 'category', 'createdAt'], // Add properties to show in list
+        },
+      },
+      {
+        resource: Category,
+        options: {
+          listProperties: ['name', 'description', 'createdAt'], // Ensure description is included
+        },
+      },
+      {
+        resource: Order,
+        options: {
+          listProperties: ['productName', 'productImage', 'quantity', 'price', 'status'], // Include quantity and price
+          properties: {
+            productName: {
+              isVisible: true,
+              type: 'string',
+            },
+            productImage: {
+              isVisible: true,
+              type: 'string',
+            },
+            quantity: {
+              isVisible: true,
+              type: 'number',
+            },
+            price: {
+              isVisible: true,
+              type: 'number',
+            },
+          },
+        },
+      },
+      {
+        resource: Transaction,
+        options: {
+          listProperties: ['userId', 'totalAmount', 'paymentStatus', 'createdAt'],
+        },
+      },
+      {
+        resource: User,
+        options: {
+          listProperties: ['name', 'email', 'createdAt'],
+        },
+      },
     ],
     rootPath: '/admin', // Path where AdminJS will be available
     branding: {
-      companyName: 'SmartKart Admin',
-      logo: path.resolve(__dirname, '../assets/logo.png'), // Correct logo path
+      companyName: 'Green Garden Admin',
+      logo: path.resolve(__dirname, '/static/logo.png'), // Correct logo path
       softwareBrothers: false, // Removes AdminJS branding
     },
     theme: 'dark', // Optional: Choose a theme like 'dark', 'light', etc.

@@ -342,7 +342,7 @@
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'Authorization': `Bearer ${token}` 
                         },
                         body: JSON.stringify({ amount: totalAmount, userId: userData.user._id })
                     });
@@ -359,8 +359,8 @@
                             amount: transactionData.amount,
                             currency: transactionData.currency,
                             order_id: transactionData.orderId,
-                            name: 'SmartKart Store',
-                            description: 'Purchase from SmartKart',
+                            name: 'Green Garden Store',
+                            description: 'Purchase from Green Garden',
                             handler: async function (razorpayResponse) {
                                 try {
                                     const deliveryDate = new Date();
@@ -370,7 +370,7 @@
                                         method: 'POST',
                                         headers: { 
                                             'Content-Type': 'application/json',
-                                            'Authorization': `Bearer ${token}`
+                                            'Authorization': `Bearer ${token}` 
                                         },
                                         body: JSON.stringify({
                                             razorpayOrderId: razorpayResponse.razorpay_order_id,
