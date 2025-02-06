@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
+            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
             text-align: center;
@@ -47,9 +47,12 @@
         }
 
         .container {
-            margin: 80px auto 20px;
+            margin: 100px auto 20px;
             padding: 20px;
             max-width: 1200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         #cart-summary, #delivery-info {
@@ -84,6 +87,12 @@
             font-weight: bold;
             color: #333;
             margin: 5px 0;
+        }
+
+        .item-description {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 5px;
         }
 
         input, button {
@@ -301,6 +310,7 @@
                             <div>
                                 <div class="item-name">${item.name}</div>
                                 <div class="item-price">₹${item.price} x ${item.quantity}</div>
+                                <div class="item-description">${item.description || 'No description available.'}</div>
                             </div>
                         </div>`;
                 });
@@ -342,7 +352,7 @@
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'Authorization': `Bearer ${token}` 
                         },
                         body: JSON.stringify({ amount: totalAmount, userId: userData.user._id })
                     });
@@ -356,77 +366,45 @@
                     if (transactionData.success) {
                         const options = {
                             key: transactionData.key,
-                            amount: transactionData.amount,
-                            currency: transactionData.currency,
-                            order_id: transactionData.orderId,
-                            name: 'SmartKart Store',
-                            description: 'Purchase from SmartKart',
-                            handler: async function (razorpayResponse) {
-                                try {
-                                    const deliveryDate = new Date();
-                                    deliveryDate.setDate(deliveryDate.getDate() + 3);
-
-                                    const orderResponse = await fetch('/api/orders', {
-                                        method: 'POST',
-                                        headers: { 
-                                            'Content-Type': 'application/json',
-                                            'Authorization': `Bearer ${token}`
-                                        },
-                                        body: JSON.stringify({
-                                            razorpayOrderId: razorpayResponse.razorpay_order_id,
-                                            razorpayPaymentId: razorpayResponse.razorpay_payment_id,
-                                            razorpaySignature: razorpayResponse.razorpay_signature,
-                                            userId: userData.user._id,
-                                            cartItems,
-                                            deliveryDate,
-                                            address
-                                        })
-                                    });
-
-                                    if (!orderResponse.ok) {
-                                        const errorData = await orderResponse.json();
-                                        throw new Error(errorData.message || "Failed to place order");
-                                    }
-
-                                    const orderData = await orderResponse.json();
-                                    if (orderData.success) {
-                                        document.getElementById('success-modal').style.display = 'block';
-                                        localStorage.removeItem('cart');
-                                    } else {
-                                        throw new Error("Failed to place order");
-                                    }
-                                } catch (error) {
-                                    showError(error.message || "Error processing order");
-                                }
+                            amount: totalAmount * 100,
+                            currency: "INR",
+                            name: "Your Company Name",
+                            description: "Order Payment",
+                            order_id: transactionData.order_id,
+                            handler: function (response) {
+                                showModal();
                             },
-                            modal: {
-                                ondismiss: function() {
-                                    payButton.disabled = false;
-                                    loadingElement.style.display = 'none';
-                                }
+                            prefill: { 
+                                name: userData.user.name,
+                                email: userData.user.email,
+                                contact: userData.user.contact
                             },
-                            theme: { color: "#4CAF50" }
+                            notes: {
+                                address: address
+                            }
                         };
-                        const razorpay = new Razorpay(options);
-                        razorpay.open();
+                        
+                        const rzp = new Razorpay(options);
+                        rzp.open();
+                    } else {
+                        showError(transactionData.message || 'Transaction failed. Please try again.');
                     }
                 } catch (error) {
-                    showError(error.message || "Error processing payment");
-                    console.error('Payment error:', error);
-                    
-                    if (error.message === 'Please login to continue') {
-                        window.location.href = '/login';
-                        return;
-                    }
+                    showError(error.message || 'An error occurred while processing your payment.');
                 }
             };
 
-            // Logout functionality
-            document.getElementById('logout-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                localStorage.removeItem('token');
-                window.location.href = '/login';
-            });
+            function showModal() {
+                const modal = document.getElementById('success-modal');
+                modal.style.display = 'block';
+            }
+
+            window.onclick = function(event) {
+                const modal = document.getElementById('success-modal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
         });
     </script>
 </body>

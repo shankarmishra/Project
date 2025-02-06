@@ -17,11 +17,14 @@ dotenv.config();
 
 // Create an Express application
 const app = express();
-app.use(express.static('public'));
 
 // Fix `__dirname` for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Serve static files correctly
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'src', 'assets')));
 
 // Set up EJS as the template engine
 app.set('view engine', 'ejs');
@@ -53,7 +56,7 @@ app.use(express.urlencoded({ extended: true }));  // Parse form data
 app.get('/', async (req, res) => {
     try {
         const categories = await Category.find();
-        if(categories.length == 0) {
+        if (categories.length === 0) {
             return res.status(500).send('No categories found');
         }
 

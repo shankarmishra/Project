@@ -2,802 +2,799 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Store</title>
-    <link rel="stylesheet" href="/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            color: #333;
-        }
-
-        nav {
-            background-color: #4CAF50;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-
-        .logo {
-            height: 40px;
-            margin-right: 20px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            color: #f5f5f5;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-icons {
-            display: flex;
-            color: white;
-            align-items: center;
-            gap: 15px;
-            background: none;
-            position: relative;
-        }
-
-        .cart-icon,
-        .profile-icon {
-            width: 30px;
-            height: 30px;
-            background: none;
-            filter: brightness(0) invert(1);
-        }
-
-        .search-bar {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            width: 200px;
-            outline: none;
-        }
-
-        .hero-banner {
-            width: 100%;
-            height: 500px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/1600x500/?garden,plants') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            padding: 20px;
-            margin-top: 80px;
-        }
-
-        .hero-banner h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        .hero-banner p {
-            font-size: 1.2em;
-            max-width: 800px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .hero-banner .cta-button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .hero-banner .cta-button:hover {
-            background-color: #45a049;
-        }
-
-        .category {
-            margin: 20px;
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            color: #333;
-        }
-
-        .category h2 {
-            background-color: #4CAF50;
-            padding: 10px;
-            border-radius: 5px;
-            color: white;
-            margin-top: 0;
-        }
-
-        .category-box {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            justify-items: center;
-            margin-top: 20px;
-        }
-
-        .category-box div {
-            background-color: white;
-            padding: 0;
-            border-radius: 10px;
-            width: 230px;
-            text-align: center;
-            transition: transform 0.2s ease-in-out;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .category-box div:hover {
-            transform: scale(1.05);
-        }
-
-        .category-box img {
-            width: 200px;
-            height: 150px;
-            border-radius: 10px;
-            padding: 10px 0;
-            object-fit: cover;
-        }
-
-        .product-actions {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 10px 10px;
-        }
-
-        .buy-now {
-            padding: 8px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            font-size: 14px;
-            width: 120px;
-            transition: background-color 0.3s;
-        }
-
-        .buy-now:hover {
-            background-color: #45a049;
-        }
-
-        .cart-icon-btn {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .cart-icon-btn img {
-            width: 25px;
-            height: 25px;
-            filter: invert(0.6);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            z-index: 1001;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .modal-content h3 {
-            color: #333;
-            margin-top: 0;
-        }
-
-        .modal-content button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .modal-content button:hover {
-            background-color: #45a049;
-        }
-
-        #about {
-            padding: 40px 20px;
-            background-color: #f9f9f9;
-            margin-top: 40px;
-        }
-
-        #about h2 {
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .about-text {
-            text-align: left;
-        }
-
-        .contact-info {
-            margin-top: 30px;
-        }
-
-        .social-links {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-            justify-content: flex-start;
-        }
-
-        .social-links a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #45a049;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            color: #333;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .user-details {
-            position: absolute;
-            top: 100%;
-            right: 0;
-        }
-
-        .user-dropdown {
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            min-width: 250px;
-            color: #333;
-            text-align: left;
-        }
-
-        .user-dropdown p {
-            margin: 5px 0;
-        }
-
-        .user-dropdown button {
-            width: 100%;
-            margin: 5px 0;
-            padding: 8px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .user-dropdown button:hover {
-            background-color: #45a049;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            padding: 0 20px;
-        }
-
-        .footer-section {
-            text-align: left;
-        }
-
-        .footer-section h3 {
-            color: #4CAF50;
-            margin-bottom: 15px;
-        }
-
-        .footer-section p {
-            margin: 5px 0;
-        }
-
-        .footer-bottom {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #555;
-            text-align: center;
-        }
-
-        .footer-bottom a {
-            color: #4CAF50;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-bottom a:hover {
-            color: #45a049;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: row;
-                padding: 10px;
-                height: 60px;
-                position: fixed;
-                align-items: center;
-            }
-
-            .logo {
-                height: 30px;
-                margin: 0;
-            }
-
-            .nav-links {
-                flex-direction: row;
-                justify-content: center;
-                margin: 0;
-            }
-
-            .nav-icons {
-                flex-direction: row;
-                justify-content: flex-end;
-                margin: 0;
-            }
-
-            .search-bar {
-                width: 150px;
-                margin: 0;
-            }
-
-            .hero-banner {
-                min-height: 300px;
-                margin-top: 80px;
-                padding: 20px;
-            }
-
-            .hero-banner h1 {
-                font-size: 2em;
-            }
-
-            .category-box {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .category-box div {
-                width: 100%;
-                margin: 0;
-            }
-
-            .category-box img {
-                width: 100%;
-                height: auto;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links a {
-                font-size: 14px;
-                padding: 5px;
-            }
-
-            .category-box {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            .category-box div {
-                width: 100%;
-            }
-
-            .hero-banner h1 {
-                font-size: 1.5em;
-            }
-
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Store</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    nav {
+      background-color: #4CAF50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      height: 40px;
+      margin-right: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      color: #f5f5f5;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-icons {
+      display: flex;
+      color: white;
+      align-items: center;
+      gap: 15px;
+      background: none;
+      position: relative;
+    }
+
+    .cart-icon,
+    .profile-icon {
+      width: 30px;
+      height: 30px;
+      background: none;
+      filter: brightness(0) invert(1);
+    }
+
+    .search-bar {
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      width: 200px;
+      outline: none;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 500px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://source.unsplash.com/1600x500/?garden,plants') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      margin-top: 80px;
+    }
+
+    .hero-banner h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .hero-banner p {
+      font-size: 1.2em;
+      max-width: 800px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .hero-banner .cta-button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hero-banner .cta-button:hover {
+      background-color: #45a049;
+    }
+
+    .category {
+      margin: 20px;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      color: #333;
+    }
+
+    .category h2 {
+      background-color: #4CAF50;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      margin-top: 0;
+    }
+
+    .category-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      justify-items: center;
+      margin-top: 20px;
+    }
+
+    .category-box div {
+      background-color: white;
+      padding: 0;
+      border-radius: 10px;
+      width: 230px;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-box div:hover {
+      transform: scale(1.05);
+    }
+
+    .category-box img {
+      width: 200px;
+      height: 150px;
+      border-radius: 10px;
+      padding: 10px 0;
+      object-fit: cover;
+    }
+
+    .product-actions {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 10px 10px;
+    }
+
+    .buy-now {
+      padding: 8px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 14px;
+      width: 120px;
+      transition: background-color 0.3s;
+    }
+
+    .buy-now:hover {
+      background-color: #45a049;
+    }
+
+    .cart-icon-btn {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-icon-btn img {
+      width: 25px;
+      height: 25px;
+      filter: invert(0.6);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 1001;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      color: #333;
+      margin-top: 0;
+    }
+
+    .modal-content button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .modal-content button:hover {
+      background-color: #45a049;
+    }
+
+    #about {
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+      margin-top: 40px;
+    }
+
+    #about h2 {
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    .about-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text {
+      text-align: left;
+    }
+
+    .contact-info {
+      margin-top: 30px;
+    }
+
+    .social-links {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      justify-content: flex-start;
+    }
+
+    .social-links a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #45a049;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      color: #333;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-details {
+      position: absolute;
+      top: 100%;
+      right: 0;
+    }
+
+    .user-dropdown {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      min-width: 250px;
+      color: #333;
+      text-align: left;
+    }
+
+    .user-dropdown p {
+      margin: 5px 0;
+    }
+
+    .user-dropdown button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .user-dropdown button:hover {
+      background-color: #45a049;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .footer-section h3 {
+      color: #4CAF50;
+      margin-bottom: 15px;
+    }
+
+    .footer-section p {
+      margin: 5px 0;
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #555;
+      text-align: center;
+    }
+
+    .footer-bottom a {
+      color: #4CAF50;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-bottom a:hover {
+      color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: row;
+        padding: 10px;
+        height: 60px;
+        align-items: center;
+      }
+
+      .logo {
+        height: 30px;
+        margin: 0;
+      }
+
+      .nav-links {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .nav-icons {
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      .search-bar {
+        width: 150px;
+      }
+
+      .hero-banner {
+        min-height: 300px;
+        margin-top: 80px;
+        padding: 20px;
+      }
+
+      .hero-banner h1 {
+        font-size: 2em;
+      }
+
+      .category-box {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .category-box div {
+        width: 100%;
+      }
+
+      .category-box img {
+        width: 100%;
+        height: auto;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links a {
+        font-size: 14px;
+        padding: 5px;
+      }
+
+      .category-box {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .category-box div {
+        width: 100%;
+      }
+
+      .hero-banner h1 {
+        font-size: 1.5em;
+      }
+
+      .social-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <img src="../assets/logo.png" alt="Plant Store Logo" class="logo">
-            <div class="nav-links">
-                <a onclick="window.location.href='/blog'">BLOG</a>
-            </div>
-            <div class="nav-icons">
-                <button class="cart-icon-btn" onclick="goToCart()">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Cart Icon" class="cart-icon">
-                </button>
-                <input type="text" placeholder="Search..." class="search-bar" onkeyup="searchProducts(this.value)">
-                <button onclick="toggleProfile()" style="background: none; border: none; cursor: pointer;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Profile" class="profile-icon">
-                </button>
-                <div class="user-details" id="userDetails"></div>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <img src="/static/logo.png" alt="Plant Store Logo" class="logo" />
+      <div class="nav-links">
+        <a onclick="window.location.href='/blog'">BLOG</a>
+      </div>
+      <div class="nav-icons">
+        <button class="cart-icon-btn" onclick="goToCart()">
+          <img src="/static/cart.png" alt="Cart Icon" class="cart-icon" />
+        </button>
+        <input type="text" placeholder="Search..." class="search-bar" onkeyup="searchProducts(this.value)" />
+        <button onclick="toggleProfile()" style="background: none; border: none; cursor: pointer;">
+          <img src="/static/profile.png" alt="User Profile" class="profile-icon" />
+        </button>
+        <div class="user-details" id="userDetails"></div>
+      </div>
+    </nav>
+  </header>
 
+  <main>
     <div class="hero-banner">
-        <h1>Welcome to Plant Store</h1>
-        <p>Discover our wide selection of beautiful plants, gardening supplies, and expert advice to create your perfect green space. From indoor plants to outdoor gardens, we have everything you need to bring nature into your life.</p>
-        
+      <h1>Welcome to Plant Store</h1>
+      <p>
+        Discover our wide selection of beautiful plants, gardening supplies, and expert advice to create your perfect green space. From indoor plants to outdoor gardens, we have everything you need to bring nature into your life.
+      </p>
     </div>
 
-    <!-- Modal for displaying user profile -->
-    <div class="profile-modal" id="profileModal">
-        <div class="profile-modal-content">
-            <button class="close-btn" onclick="closeProfileModal()">×</button>
-           
-                <!-- User details will be displayed here -->
-            </div>
-        </div>
-    </div>
+    <!-- Dynamic Categories & Products (EJS template syntax) -->
     <% if (categories.length > 0) { %>
-        <% categories.forEach(category => { %>
-            <% if (category.products.length > 0) { %>
-                <section class="category">
-                    <h2><%= category.name %></h2>
-                    <div class="category-box">
-                        <% category.products.forEach(product => { %>
-                            <div class="product-item" data-name="<%= product.name.toLowerCase() %>">
-                                <img src="<%= product.image_uri || '/images/default-image.jpg' %>" alt="<%= product.name %>">
-                                <p><strong><%= product.name %></strong></p>
-                                <p>₹<%= product.price.toFixed(2) %></p>
-                                <!-- <p><%= product.description %></p> -->
-
-                                <div class="product-actions">
-                                    <button class="cart-icon-btn" onclick="addToCart('<%= product.id %>', '<%= product.name %>', '<%= product.price %>', '<%= product.image_uri %>', '<%= product.description %>')">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Add to Cart" class="cart-icon">
-                                    </button>
-                                    <button class="buy-now" onclick="buyNow('<%= product.id %>', '<%= product.name %>', '<%= product.price %>', '<%= product.image_uri %>', '<%= product.description %>')">Buy Now</button>
-                                </div>
-                            </div>
-                        <% }) %>
-                    </div>
-                </section>
-            <% } else { %>
-                <section class="category">
-                    <h2><%= category.name %></h2>
-                    <p>No products available in this category.</p>
-                </section>
-            <% } %>
-        <% }) %>
+      <% categories.forEach(category => { %>
+        <section class="category">
+          <h2><%= category.name %></h2>
+          <% if (category.products.length > 0) { %>
+            <div class="category-box">
+              <% category.products.forEach(product => { %>
+                <div class="product-item" data-name="<%= product.name.toLowerCase() %>">
+                  <img src="<%= product.image_uri || '/images/default-image.jpg' %>" alt="<%= product.name %>" />
+                  <p><strong><%= product.name %></strong></p>
+                  <p>₹<%= product.price.toFixed(2) %></p>
+                  <div class="product-actions">
+                    <button class="cart-icon-btn" onclick="addToCart('<%= product.id %>', '<%= product.name %>', '<%= product.price %>', '<%= product.image_uri %>', '<%= product.description %>')">
+                      <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Add to Cart" class="cart-icon" />
+                    </button>
+                    <button class="buy-now" onclick="buyNow('<%= product.id %>', '<%= product.name %>', '<%= product.price %>', '<%= product.image_uri %>', '<%= product.description %>')">
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          <% } else { %>
+            <p>No products available in this category.</p>
+          <% } %>
+        </section>
+      <% }) %>
     <% } else { %>
-        <p>No categories found.</p>
+      <p>No categories found.</p>
     <% } %>
 
+    <!-- About Section -->
     <section id="about">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>About Us</h2>
-                <p>Welcome to Plant Store, your one-stop destination for all things green. We offer a wide variety of plants, seeds, and fertilizers to help you build your perfect garden. Our team of experts is dedicated to providing you with the highest quality plants and gardening supplies.</p>
-                
-                <div class="contact-info">
-                    <h3>Contact Us</h3>
-                    <p><strong>Address:</strong> 123 Garden Street, Green Valley, GV 12345</p>
-                    <p><strong>Email:</strong> info@plantstore.com</p>
-                    <p><strong>Phone:</strong> (555) 123-4567</p>
-                    
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/share/1ACfzA87VW/" target="_blank">Facebook</a>
-                        <a href="https://youtube.com/@homegarden26?si=lZkW419jMM38KXeK" target="_blank">YouTube</a>
-                        <a href="https://www.instagram.com/homegardenyt?utm_source=qr&igsh=NWtidWE4ZHpsbmh4" target="_blank">Instagram</a>
-                    </div>
-                </div>
-
-                <div class="policies">
-                    <h3>Our Policies</h3>
-                    <p><strong>Return Policy:</strong> 7-day return policy for plants in original condition</p>
-                    <p><strong>Shipping Policy:</strong> Free shipping on orders above ₹999</p>
-                    <p><strong>Privacy Policy:</strong> We respect your privacy and protect your personal information</p>
-                    <p><strong>Terms of Service:</strong> By using our service, you agree to our terms and conditions</p>
-                </div>
+      <div class="about-content">
+        <div class="about-text">
+          <h2>About Us</h2>
+          <p>
+            Welcome to Plant Store, your one-stop destination for all things green. We offer a wide variety of plants, seeds, and fertilizers to help you build your perfect garden. Our team of experts is dedicated to providing you with the highest quality plants and gardening supplies.
+          </p>
+          <div class="contact-info">
+            <h3>Contact Us</h3>
+            <p><strong>Address:</strong> 123 Garden Street, Green Valley, GV 12345</p>
+            <p><strong>Email:</strong> info@plantstore.com</p>
+            <p><strong>Phone:</strong> (+91) 9760653073</p>
+            <div class="social-links">
+              <a href="https://www.facebook.com/share/1ACfzA87VW/" target="_blank">Facebook</a>
+              <a href="https://youtube.com/@homegarden26?si=lZkW419jMM38KXeK" target="_blank">YouTube</a>
+              <a href="https://www.instagram.com/homegardenyt?utm_source=qr&igsh=NWtidWE4ZHpsbmh4" target="_blank">Instagram</a>
             </div>
-            <div class="about-image">
-                <img src="https://source.unsplash.com/600x400/?garden" alt="Our Garden Center">
-            </div>
+          </div>
+          <div class="policies">
+            <h3>Our Policies</h3>
+            <p><strong>Return Policy:</strong> 7-day return policy for plants in original condition</p>
+            <p><strong>Shipping Policy:</strong> Free shipping on orders above ₹999</p>
+            <p><strong>Privacy Policy:</strong> We respect your privacy and protect your personal information</p>
+            <p><strong>Terms of Service:</strong> By using our service, you agree to our terms and conditions</p>
+          </div>
         </div>
+      </div>
     </section>
+  </main>
 
-            </div>
-           
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 Plant Store. All rights reserved.</p>
-            <p>Website created by: <a href="mailto:xshankarmishra@gmail.com">xshankarmishra@gmail.com</a></p>
-        </div>
-    </footer>
-
-    <!-- Modal for login/register prompt -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
-            <h3>Please log in or register to proceed</h3>
-            <button onclick="window.location.href='/login'">Login</button>
-            <button onclick="window.location.href='/register'">Register</button>
-        </div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Plant Store</h3>
+        <p>Your one-stop shop for quality plants and gardening supplies.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="/blog" style="color: #4CAF50;">Blog</a></p>
+        <!-- <p><a href="/contact" style="color: #4CAF50;">Contact</a></p> -->
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <p>Email: info@plantstore.com</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
     </div>
+    <div class="footer-bottom">
+      <p>© 2024 Plant Store. All rights reserved.</p>
+      <p>Website created by: <a href="mailto:xshankarmishra@gmail.com">xshankarmishra@gmail.com</a></p>
+    </div>
+  </footer>
 
-    <script>
-        let profileVisible = false;
-        
-        function searchProducts(searchTerm) {
-            searchTerm = searchTerm.toLowerCase();
-            const products = document.querySelectorAll('.product-item');
-            
-            products.forEach(product => {
-                const productName = product.getAttribute('data-name');
-                if (productName.includes(searchTerm)) {
-                    product.classList.remove('hidden');
-                } else {
-                    product.classList.add('hidden');
-                }
-            });
+  <!-- Modal for login/register prompt -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <h3>Please log in or register to proceed</h3>
+      <button onclick="window.location.href='/login'">Login</button>
+      <button onclick="window.location.href='/register'">Register</button>
+    </div>
+  </div>
 
-            // Show/hide "No products found" message for each category
-            document.querySelectorAll('.category').forEach(category => {
-                const visibleProducts = category.querySelectorAll('.product-item:not(.hidden)').length;
-                const noProductsMessage = category.querySelector('p');
-                
-                if (visibleProducts === 0 && !noProductsMessage) {
-                    const message = document.createElement('p');
-                    message.textContent = 'No products found in this category.';
-                    message.classList.add('no-products-message');
-                    category.appendChild(message);
-                } else if (visibleProducts > 0 && noProductsMessage) {
-                    noProductsMessage.remove();
-                }
-            });
+  <script>
+    let profileVisible = false;
+
+    function searchProducts(searchTerm) {
+      searchTerm = searchTerm.toLowerCase();
+      const products = document.querySelectorAll('.product-item');
+
+      products.forEach(product => {
+        const productName = product.getAttribute('data-name');
+        if (productName.includes(searchTerm)) {
+          product.classList.remove('hidden');
+        } else {
+          product.classList.add('hidden');
         }
-        
-        function toggleProfile() {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
+      });
 
-            if (!profileVisible) {
-                fetchAndShowProfile();
-            } else {
-                document.getElementById('userDetails').innerHTML = '';
-            }
-            profileVisible = !profileVisible;
+      // Show/hide "No products found" message for each category
+      document.querySelectorAll('.category').forEach(category => {
+        const visibleProducts = category.querySelectorAll('.product-item:not(.hidden)').length;
+        const noProductsMessage = category.querySelector('.no-products-message');
+
+        if (visibleProducts === 0 && !noProductsMessage) {
+          const message = document.createElement('p');
+          message.textContent = 'No products found in this category.';
+          message.classList.add('no-products-message');
+          category.appendChild(message);
+        } else if (visibleProducts > 0 && noProductsMessage) {
+          noProductsMessage.remove();
         }
+      });
+    }
 
-        function fetchAndShowProfile() {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
+    function toggleProfile() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        document.getElementById('loginModal').style.display = 'flex';
+        return;
+      }
 
-            fetch('/api/users/profile', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Token expired or invalid');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.user) {
-                    const userProfile = `
-                        <div class="user-dropdown">
-                            <p><strong>Email:</strong> ${data.user.email}</p>
-                            <p><strong>Phone:</strong> ${data.user.phone}</p>
-                            <p><strong>Address:</strong> ${data.user.address || 'Not provided'}</p>
-                            <button onclick="window.location.href='/orders'">My Orders</button>
-                            <button onclick="logout()">Logout</button>
-                        </div>
-                    `;
-                    document.getElementById('userDetails').innerHTML = userProfile;
-                }
-            })
-            .catch(error => {
-                console.log('Error:', error);
-                logout();
-            });
+      if (!profileVisible) {
+        fetchAndShowProfile();
+      } else {
+        document.getElementById('userDetails').innerHTML = '';
+      }
+      profileVisible = !profileVisible;
+    }
+
+    function fetchAndShowProfile() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        document.getElementById('loginModal').style.display = 'flex';
+        return;
+      }
+
+      fetch('/api/users/profile', {
+        headers: {
+          'Authorization': `Bearer ${token}`
         }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Token expired or invalid');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.user) {
+            const userProfile = `
+              <div class="user-dropdown">
+                <p><strong>Email:</strong> ${data.user.email}</p>
+                <p><strong>Phone:</strong> ${data.user.phone}</p>
+                <p><strong>Address:</strong> ${data.user.address || 'Not provided'}</p>
+                <button onclick="window.location.href='/orders'">My Orders</button>
+                <button onclick="logout()">Logout</button>
+              </div>
+            `;
+            document.getElementById('userDetails').innerHTML = userProfile;
+          }
+        })
+        .catch(error => {
+          console.log('Error:', error);
+          logout();
+        });
+    }
 
-        function isUserLoggedIn() {
-            const token = localStorage.getItem('token');
-            return token !== null;
+    function isUserLoggedIn() {
+      const token = localStorage.getItem('token');
+      return token !== null;
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('cart');
+      profileVisible = false;
+      document.getElementById('userDetails').innerHTML = '';
+      window.location.href = '/login';
+    }
+
+    function closeModal() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+
+    function addToCart(productId, productName, productPrice, productImage, productDescription) {
+      if (!isUserLoggedIn()) {
+        document.getElementById('loginModal').style.display = 'flex';
+        return;
+      }
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingProduct = cart.find(item => item.id === productId);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push({
+          id: productId,
+          name: productName,
+          price: parseFloat(productPrice),
+          quantity: 1,
+          image: productImage || '/images/default-image.jpg',
+          description: productDescription
+        });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Product added to cart!');
+    }
+
+    function buyNow(productId, productName, productPrice, productImage, productDescription) {
+      if (!isUserLoggedIn()) {
+        document.getElementById('loginModal').style.display = 'flex';
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      fetch('/api/users/profile', {
+        headers: {
+          'Authorization': `Bearer ${token}`
         }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.user) {
+            const buyNowItem = {
+              id: productId,
+              name: productName,
+              price: parseFloat(productPrice),
+              quantity: 1,
+              image: productImage || '/images/default-image.jpg',
+              description: productDescription
+            };
 
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('cart');
-            profileVisible = false;
-            document.getElementById('userDetails').innerHTML = '';
-            window.location.href = '/login';
-        }
+            localStorage.setItem('cart', JSON.stringify([buyNowItem]));
+            window.location.href = `/checkout?productId=${productId}&name=${encodeURIComponent(productName)}&price=${productPrice}&image=${encodeURIComponent(productImage || '/images/default-image.jpg')}&description=${encodeURIComponent(productDescription)}`;
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to process the order');
+        });
+    }
 
-        function closeModal() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
+    function goToCart() {
+      if (!isUserLoggedIn()) {
+        document.getElementById('loginModal').style.display = 'flex';
+        return;
+      }
+      window.location.href = '/cart';
+    }
 
-        function addToCart(productId, productName, productPrice, productImage, productDescription) {
-            if (!isUserLoggedIn()) {
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingProduct = cart.find(item => item.id === productId);
-            
-            if (existingProduct) {
-                existingProduct.quantity += 1;
-            } else {
-                cart.push({ 
-                    id: productId, 
-                    name: productName, 
-                    price: parseFloat(productPrice),
-                    quantity: 1,
-                    image: productImage || '/images/default-image.jpg',
-                    description: productDescription
-                });
-            }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert('Product added to cart!');
-        }
-
-        function buyNow(productId, productName, productPrice, productImage, productDescription) {
-            if (!isUserLoggedIn()) {
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
-
-            const token = localStorage.getItem('token');
-            fetch('/api/users/profile', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.user) {
-                    const buyNowItem = {
-                        id: productId,
-                        name: productName,
-                        price: parseFloat(productPrice),
-                        quantity: 1,
-                        image: productImage || '/images/default-image.jpg',
-                        description: productDescription
-                    };
-
-                    localStorage.setItem('cart', JSON.stringify([buyNowItem]));
-                    window.location.href = `/checkout?productId=${productId}&name=${encodeURIComponent(productName)}&price=${productPrice}&image=${encodeURIComponent(productImage || '/images/default-image.jpg')}&description=${encodeURIComponent(productDescription)}`;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to process the order');
-            });
-        }
-
-        function goToCart() {
-            if (!isUserLoggedIn()) {
-                document.getElementById('loginModal').style.display = 'flex';
-                return;
-            }
-            window.location.href = '/cart';
-        }
-
-        window.onclick = function(event) {
-            if (event.target === document.getElementById('loginModal')) {
-                document.getElementById('loginModal').style.display = 'none';
-            }
-            if (!event.target.closest('.nav-icons') && profileVisible) {
-                document.getElementById('userDetails').innerHTML = '';
-                profileVisible = false;
-            }
-        };
-    </script>
+    window.onclick = function (event) {
+      if (event.target === document.getElementById('loginModal')) {
+        document.getElementById('loginModal').style.display = 'none';
+      }
+      if (!event.target.closest('.nav-icons') && profileVisible) {
+        document.getElementById('userDetails').innerHTML = '';
+        profileVisible = false;
+      }
+    };
+  </script>
 </body>
 
 </html>

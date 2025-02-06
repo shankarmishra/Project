@@ -109,6 +109,12 @@
             padding: 5px;
         }
 
+        .cart-item-description {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+
         .cart-actions {
             margin-top: 20px;
             display: flex;
@@ -176,7 +182,6 @@
 </head>
 <body>
 
-
     <div class="cart-items">
         <h2>Your Cart</h2>
 
@@ -221,6 +226,9 @@
                             <p>₹${item.price.toFixed(2)}</p>
                             <input type="number" min="1" class="quantity-input" value="${item.quantity}" onchange="updateQuantity('${item.id}', this.value)">
                             <p>Subtotal: ₹${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                        <div class="cart-item-description">
+                            <p>${item.description || 'No description available'}</p>
                         </div>
                         <button class="remove-btn" onclick="removeItem('${item.id}')">Remove</button>
                     `;
