@@ -1,143 +1,288 @@
 export const categoriesData = [
   {
-    id: 1,
-    name: "Plants",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/green-plant-1343531187htF.jpg",
-  },
-  {
-    id: 2,
-    name: "Garden Accessories",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/garden-tools-1339314206TeJ.jpg",
-  },
-  {
-    id: 3,
-    name: "Seeds",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/10000/velka/seeds-in-drying-basket-1239921410gq6.jpg",
-  },
+    "categories": [
+      {
+        "name": "Fruits Plants",
+        "type": "Plant"
+      },
+      {
+        "name": "Flower Plants",
+        "type": "Plant"
+      },
+      {
+        "name": "Cactus Plants",
+        "type": "Plant"
+      },
+      {
+        "name": "Herb Plants",
+        "type": "Plant"
+      },
+      {
+        "name": "Growbag",
+        "type": "Garden Accessories"
+      },
+      {
+        "name": "Fertilizer",
+        "type": "Garden Accessories"
+      },
+      {
+        "name": "Garden Tool",
+        "type": "Garden Accessories"
+      },
+      {
+        "name": "Vegetable Seeds",
+        "type": "Seeds"
+      },
+      {
+        "name": "Flower Seeds",
+        "type": "Seeds"
+      },
+      {
+        "name": "Herb Seeds",
+        "type": "Seeds"
+      }
+    ]
+  }
+  
 ];
 
 export const productData = [
   // Plants category
   {
-    name: "Aloe Vera Plant",
-    price: 15,
-    description:
-      "Aloe Vera is a succulent plant species with many health benefits.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/40000/velka/aloe-vera-plant-1525086674M4m.jpg",
-    ar_uri: null,
-    category: "Plants",
-  },
-  {
-    name: "Snake Plant",
-    price: 20,
-    description:
-      "Snake plant, also known as Sansevieria, is a hardy indoor plant.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/snake-plant-1422075163j2c.jpg",
-    ar_uri: null,
-    category: "Plants",
-  },
-  {
-    name: "Ficus Tree",
-    price: 50,
-    description: "Ficus trees are popular houseplants with lush green foliage.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/ficus-tree-1560208346kdf.jpg",
-    ar_uri: null,
-    category: "Plants",
-  },
-  {
-    name: "Peace Lily",
-    price: 25,
-    description:
-      "Peace Lily is an indoor plant that is easy to care for and purifies the air.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/peace-lily-1418386902sqw.jpg",
-    ar_uri: null,
-    category: "Plants",
-  },
-
-  // Garden Accessories category
-  {
-    name: "Garden Pruning Shears",
-    price: 15,
-    description:
-      "High-quality pruning shears for trimming and shaping plants and shrubs.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/10000/velka/garden-pruning-shears-1338676795vMm.jpg",
-    ar_uri: null,
-    category: "Garden Accessories",
-  },
-  {
-    name: "Garden Gloves",
-    price: 10,
-    description:
-      "Durable gloves to protect your hands during gardening and planting.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/20000/velka/garden-gloves-1407576812Ls8.jpg",
-    ar_uri: null,
-    category: "Garden Accessories",
-  },
-  {
-    name: "Watering Can",
-    price: 12,
-    description:
-      "A lightweight, easy-to-use watering can for your plants and garden.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/20000/velka/watering-can-1338812733O58.jpg",
-    ar_uri: null,
-    category: "Garden Accessories",
-  },
-  {
-    name: "Garden Hoe",
-    price: 18,
-    description:
-      "A sturdy garden hoe for cultivating soil and removing weeds.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/garden-hoe-1423199064T4f.jpg",
-    ar_uri: null,
-    category: "Garden Accessories",
-  },
-
-  // Seeds category
-  {
-    name: "Tomato Seeds",
-    price: 5,
-    description: "High-quality tomato seeds for growing fresh tomatoes.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/20000/velka/tomato-seeds-1338676958fs4.jpg",
-    ar_uri: null,
-    category: "Seeds",
-  },
-  {
-    name: "Sunflower Seeds",
-    price: 4,
-    description: "Sunflower seeds for beautiful and bright sunflowers.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/10000/velka/sunflower-seeds-1346242445ShW.jpg",
-    ar_uri: null,
-    category: "Seeds",
-  },
-  {
-    name: "Lettuce Seeds",
-    price: 3,
-    description: "Lettuce seeds for growing crisp and healthy lettuce.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/lettuce-seeds-1423955226pTf.jpg",
-    ar_uri: null,
-    category: "Seeds",
-  },
-  {
-    name: "Cucumber Seeds",
-    price: 6,
-    description: "Cucumber seeds for fresh and crunchy cucumbers.",
-    image_uri:
-      "https://www.publicdomainpictures.net/pictures/30000/velka/cucumber-seeds-1423984567Vhr.jpg",
-    ar_uri: null,
-    category: "Seeds",
-  },
+    "categories": [
+      {
+        "name": "Fruit Plants",
+        "products": [
+          {
+            "name": "Apple Plant",
+            "price": 25,
+            "description": "Healthy apple plant for your garden.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0263/3117/0372/products/apple-tree.jpg"
+          },
+          {
+            "name": "Mango Plant",
+            "price": 30,
+            "description": "A mango plant to grow sweet mangoes.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0410/9335/0811/products/mango-plant.jpg"
+          },
+          {
+            "name": "Banana Plant",
+            "price": 18,
+            "description": "Grow delicious bananas with this plant.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/2337/8883/products/banana-tree.jpg"
+          },
+          {
+            "name": "Grapes Plant",
+            "price": 20,
+            "description": "A grapevine to grow fresh grapes.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/1550/3937/products/grape-plant.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Flower Plants",
+        "products": [
+          {
+            "name": "Rose Plant",
+            "price": 15,
+            "description": "A rose plant for beautiful flowers.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0609/2647/7947/products/rose-plant.jpg"
+          },
+          {
+            "name": "Hibiscus Plant",
+            "price": 12,
+            "description": "Hibiscus plant for bright and tropical blooms.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0330/7933/products/hibiscus-plant.jpg"
+          },
+          {
+            "name": "Jasmine Plant",
+            "price": 10,
+            "description": "Jasmine plant for fragrant flowers.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/1551/6353/products/jasmine-plant.jpg"
+          },
+          {
+            "name": "Orchid Plant",
+            "price": 35,
+            "description": "Elegant orchids to beautify your home.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0413/1559/products/orchid-plant.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Cactus Plants",
+        "products": [
+          {
+            "name": "Golden Barrel Cactus",
+            "price": 25,
+            "description": "A round, striking cactus for your garden.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0326/7183/8028/products/barrel-cactus.jpg"
+          },
+          {
+            "name": "Echeveria",
+            "price": 15,
+            "description": "A colorful cactus ideal for decoration.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0816/1995/products/echeveria.jpg"
+          },
+          {
+            "name": "Opuntia Cactus",
+            "price": 22,
+            "description": "Prickly pear cactus with stunning flowers.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0323/9601/7489/products/opuntia-cactus.jpg"
+          },
+          {
+            "name": "Christmas Cactus",
+            "price": 20,
+            "description": "A flowering cactus for the festive season.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/2510/1401/products/christmas-cactus.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Herb Plants",
+        "products": [
+          {
+            "name": "Basil",
+            "price": 12,
+            "description": "Fresh basil for culinary use.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0510/5556/3243/products/basil-plant.jpg"
+          },
+          {
+            "name": "Mint",
+            "price": 10,
+            "description": "Mint plant for fresh herbs.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0331/5323/products/mint-plant.jpg"
+          },
+          {
+            "name": "Cilantro",
+            "price": 10,
+            "description": "Cilantro plant to enhance your cooking.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0315/1591/products/cilantro-plant.jpg"
+          },
+          {
+            "name": "Thyme",
+            "price": 8,
+            "description": "Thyme plant for aromatic dishes.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0715/9137/products/thyme-plant.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Growbag Garden Accessories",
+        "products": [
+          {
+            "name": "Fabric Grow Bags",
+            "price": 5,
+            "description": "Durable fabric grow bags for plants.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0115/1237/products/fabric-growbag.jpg"
+          },
+          {
+            "name": "Plastic Grow Bags",
+            "price": 3,
+            "description": "Reusable plastic grow bags.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0983/2020/products/plastic-growbags.jpg"
+          },
+          {
+            "name": "Biodegradable Grow Bags",
+            "price": 8,
+            "description": "Eco-friendly grow bags for your plants.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0234/1104/products/biodegradable-growbag.jpg"
+          },
+          {
+            "name": "Hanging Grow Bags",
+            "price": 10,
+            "description": "Space-saving grow bags for hanging plants.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/2333/5400/products/hanging-growbags.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Fertilizer Garden Accessories",
+        "products": [
+          {
+            "name": "Organic Fertilizer",
+            "price": 12,
+            "description": "Rich organic fertilizer for your garden.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0717/2560/products/organic-fertilizer.jpg"
+          },
+          {
+            "name": "Compost",
+            "price": 10,
+            "description": "Nutrient-rich compost for plants.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0419/5373/products/compost.jpg"
+          },
+          {
+            "name": "Liquid Fertilizer",
+            "price": 15,
+            "description": "High-quality liquid fertilizer.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0997/1531/products/liquid-fertilizer.jpg"
+          },
+          {
+            "name": "Slow Release Fertilizer",
+            "price": 18,
+            "description": "Slow-release fertilizer for sustained growth.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0420/5175/products/slow-release-fertilizer.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Garden Tools",
+        "products": [
+          {
+            "name": "Pruning Shears",
+            "price": 15,
+            "description": "High-quality pruning shears for trimming.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0357/2888/products/pruning-shears.jpg"
+          },
+          {
+            "name": "Trowel",
+            "price": 8,
+            "description": "Trowel for planting and digging.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0345/2823/products/trowel.jpg"
+          },
+          {
+            "name": "Rake",
+            "price": 12,
+            "description": "A rake for gardening and clearing debris.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0433/2501/products/rake.jpg"
+          },
+          {
+            "name": "Gardening Gloves",
+            "price": 10,
+            "description": "Durable gloves to protect hands.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0653/1755/products/gardening-gloves.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Vegetable Seeds",
+        "products": [
+          {
+            "name": "Tomato Seeds",
+            "price": 5,
+            "description": "Grow fresh and juicy tomatoes.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0814/4805/products/tomato-seeds.jpg"
+          },
+          {
+            "name": "Carrot Seeds",
+            "price": 4,
+            "description": "Healthy carrot seeds for your garden.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0836/4651/products/carrot-seeds.jpg"
+          },
+          {
+            "name": "Spinach Seeds",
+            "price": 3,
+            "description": "Spinach seeds for fresh greens.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0364/2683/products/spinach-seeds.jpg"
+          },
+          {
+            "name": "Cucumber Seeds",
+            "price": 6,
+            "description": "Crisp cucumber seeds for your salad.",
+            "image_uri": "https://cdn.shopify.com/s/files/1/0375/4903/products/cucumber-seeds.jpg"
+          }
+        ]
+      }
+    ]
+  }
+  
 ];
