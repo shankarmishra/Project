@@ -400,13 +400,44 @@
     /* Responsive Styles */
     /* For tablet sizes */
     @media screen and (max-width: 768px) {
-      .hero-banner h1 {
-        font-size: 2.5rem;
-        width: 100%;
-      }
-      .hero-banner p {
-        font-size: 1rem;
-      }
+      .hero-banner {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Base Hero Slider Styles */
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Default height on larger screens */
+  overflow: hidden;
+}
+.hero-slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This crops the image */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.hero-slider .slide.active {
+  opacity: 1;
+}
+
+/* For phone sizes (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .hero-slider {
+    height: 300px; /* Adjust the height as needed for phones */
+  }
+  .hero-slider .slide {
+    /* Change from cover to contain to ensure the full image is visible */
+    object-fit: contain;
+  }
+}
+
+
       .cta-button {
         padding: 8px 15px;
         font-size: 0.9rem;
