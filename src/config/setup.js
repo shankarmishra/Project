@@ -23,8 +23,8 @@ const __dirname = dirname(__filename);
 
 // Default admin credentials
 const DEFAULT_ADMIN = {
-  email: process.env.ADMIN_EMAIL || 'xxxxxx@gmail.com',
-  password: process.env.ADMIN_PASSWORD || 'xxxxxx1162@',
+  email: process.env.ADMIN_EMAIL || 'gmaillllllllllllllllllllllllllllllllllllllllllllllllllllllllll',
+  password: process.env.ADMIN_PASSWORD || 'passworddddddddddddddddddddddddddddddddddddddddddddddd',
 };
 
 // Authentication logic for AdminJS

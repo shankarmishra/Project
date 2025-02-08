@@ -16,8 +16,8 @@ const createTransaction = asyncHandler(async (req, res) => {
 
     // Initialize Razorpay instance
     const razorpay = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_Cc0mvAJo348HdP',
-        key_secret: process.env.RAZORPAY_PAY_SECRET || 'BHLYjYUlyJtQOQmUviYQM7K9',
+        key_id: process.env.RAZORPAY_KEY_ID || '',
+        key_secret: process.env.RAZORPAY_PAY_SECRET || '',
     });
 
     // Verify that API credentials are set correctly
@@ -40,7 +40,7 @@ const createTransaction = asyncHandler(async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Order created successfully",
-            key: process.env.RAZORPAY_KEY_ID || 'rzp_test_Cc0mvAJo348HdP',
+            key: process.env.RAZORPAY_KEY_ID || '',
             amount: razorpayOrder.amount,
             currency: razorpayOrder.currency,
             orderId: razorpayOrder.id,
